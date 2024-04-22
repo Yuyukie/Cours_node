@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 
 const stuffRoutes = require("./routes/stuff.js");
 const userRoutes = require("./routes/users.js");
+const path = require('path');
 
 mongoose.connect("mongodb+srv://benjaminmazars:sEtPjCJwxvSK6Gj2@cluster0.dvaku3x.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
   .then(() => console.log('Connexion à MongoDB réussie !'))
@@ -21,8 +22,9 @@ app.use((req, res, next) => {
 
 app.use(bodyParser.json());
 
-app.use("/api/stuff", stuffRoutes)
-app.use("/api/auth", userRoutes)
+app.use("/api/stuff", stuffRoutes);
+app.use("/api/auth", userRoutes);
+app.use("/images", express.static(path.join(__dirname, "images")));
 
 
 module.exports = app; 
